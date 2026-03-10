@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPOスポーツクラブの「困った」を一緒に解決します | スポーツクラブ経営支援</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #F26522;
+    --orange-light: #FF8547;
+    --orange-pale: #FFF3EC;
+    --orange-mid: #FFE0CC;
+    --teal: #2A7D7D;
+    --teal-light: #3A9696;
+    --teal-pale: #E6F4F4;
+    --white: #FFFFFF;
+    --off-white: #FAFAF8;
+    --cream: #FDF8F2;
+    --gray-dark: #333333;
+    --gray: #666666;
+    --gray-light: #CCCCCC;
+    --gray-bg: #F5F5F3;
+    --border: #E8E4DE;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--white);
+    color: var(--gray-dark);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ========== NAV ========== */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--white);
+    border-bottom: 3px solid var(--orange);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-logo-icon {
+    width: 36px; height: 36px; background: var(--orange); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .nav-logo-text {
+    font-size: 15px; font-weight: 700; color: var(--gray-dark); line-height: 1.3;
+  }
+  .nav-logo-text span { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange); color: var(--white);
+    padding: 10px 24px; border-radius: 6px;
+    font-size: 14px; font-weight: 700;
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .nav-cta:hover { background: var(--orange-light); transform: translateY(-1px); }
+
+  /* ========== HERO ========== */
+  .hero {
+    background: var(--cream);
+    padding: 64px 40px 56px;
+    position: relative; overflow: hidden;
+  }
+  .hero-inner {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 380px; gap: 48px; align-items: center;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--orange-pale); border: 1.5px solid var(--orange);
+    color: var(--orange); padding: 6px 14px; border-radius: 4px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+  .hero-tag::before { content: '▶'; font-size: 9px; }
+  .hero-h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(26px, 3.2vw, 40px);
+    font-weight: 900; line-height: 1.45;
+    color: var(--gray-dark); margin-bottom: 20px;
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero-h1 .accent { color: var(--orange); }
+  .hero-h1 .underline {
+    background: linear-gradient(transparent 60%, var(--orange-mid) 60%);
+  }
+  .hero-lead {
+    font-size: 15px; color: var(--gray); line-height: 1.9;
+    margin-bottom: 32px; max-width: 500px;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .btn-orange {
+    background: var(--orange); color: var(--white);
+    padding: 14px 32px; border-radius: 6px;
+    font-size: 15px; font-weight: 700; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 16px rgba(242,101,34,0.35);
+    transition: all 0.2s;
+  }
+  .btn-orange:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(242,101,34,0.4); }
+  .btn-outline {
+    background: var(--white); color: var(--teal);
+    padding: 14px 28px; border-radius: 6px;
+    font-size: 14px; font-weight: 700; text-decoration: none;
+    border: 2px solid var(--teal);
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { background: var(--teal); color: var(--white); }
+
+  /* hero illustration */
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    animation: fadeUp 0.7s 0.15s ease both;
+  }
+  .hero-illust-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.1);
+    width: 100%;
+    border-top: 4px solid var(--orange);
+  }
+  .illust-header {
+    font-size: 13px; font-weight: 700; color: var(--orange); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .illust-header::before { content: ''; width: 16px; height: 3px; background: var(--orange); border-radius: 2px; display: inline-block; }
+  .illust-items { display: flex; flex-direction: column; gap: 10px; }
+  .illust-item {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--gray-bg); border-radius: 8px; padding: 10px 14px;
+  }
+  .illust-emoji { font-size: 22px; }
+  .illust-text { font-size: 13px; font-weight: 700; line-height: 1.4; }
+  .illust-sub { font-size: 11px; color: var(--gray); margin-top: 2px; }
+  .illust-arrow {
+    text-align: center; color: var(--orange); font-size: 18px; margin: 4px 0;
+  }
+
+  /* ========== SECTION COMMON ========== */
+  .section { padding: 72px 40px; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-header { margin-bottom: 48px; }
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--orange-pale); color: var(--orange);
+    padding: 4px 12px; border-radius: 4px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .section-h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(22px, 2.5vw, 32px);
+    font-weight: 900; line-height: 1.4;
+    color: var(--gray-dark);
+  }
+  .section-h2 .accent { color: var(--orange); }
+  .section-desc {
+    font-size: 15px; color: var(--gray); line-height: 1.9;
+    margin-top: 12px; max-width: 640px;
+  }
+
+  /* ========== TROUBLE ========== */
+  .trouble { background: var(--cream); }
+  .trouble-intro {
+    background: var(--white); border-radius: 12px;
+    border-left: 4px solid var(--orange);
+    padding: 20px 24px; margin-bottom: 32px;
+    font-size: 15px; line-height: 1.8;
+  }
+  .trouble-intro strong { color: var(--orange); }
+  .trouble-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .trouble-item {
+    background: var(--white); border-radius: 12px; padding: 20px 20px 20px 20px;
+    display: flex; align-items: flex-start; gap: 14px;
+    border: 1.5px solid var(--border);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  .trouble-item:hover {
+    border-color: var(--orange);
+    box-shadow: 0 4px 16px rgba(242,101,34,0.12);
+  }
+  .trouble-emoji { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+  .trouble-title { font-size: 14px; font-weight: 700; line-height: 1.6; color: var(--gray-dark); }
+  .trouble-body { font-size: 12px; color: var(--gray); margin-top: 4px; line-height: 1.6; }
+  .trouble-check {
+    position: absolute; top: -1px; right: -1px;
+    background: var(--orange); color: var(--white);
+    font-size: 10px; font-weight: 700;
+    padding: 3px 8px; border-radius: 0 10px 0 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .trouble-resolve {
+    margin-top: 32px;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+    border-radius: 12px; padding: 28px 32px;
+    display: flex; align-items: center; gap: 20px;
+    color: var(--white);
+  }
+  .trouble-resolve-icon { font-size: 48px; flex-shrink: 0; }
+  .trouble-resolve-text { font-size: 16px; font-weight: 700; line-height: 1.7; }
+  .trouble-resolve-sub { font-size: 13px; opacity: 0.85; margin-top: 6px; line-height: 1.7; }
+
+  /* ========== SERVICES ========== */
+  .services { background: var(--white); }
+  .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .service-card {
+    background: var(--off-white); border-radius: 14px; padding: 32px 28px;
+    border: 1.5px solid var(--border); position: relative; overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .service-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+    background: var(--orange); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.1); }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-card.featured {
+    background: var(--orange-pale); border-color: var(--orange);
+  }
+  .service-card.featured::after { background: var(--orange); transform: scaleX(1); }
+  .service-num {
+    font-size: 11px; font-weight: 700; color: var(--orange); letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .service-emoji { font-size: 40px; margin-bottom: 14px; display: block; }
+  .service-title { font-size: 18px; font-weight: 900; color: var(--gray-dark); margin-bottom: 10px; line-height: 1.4; }
+  .service-body { font-size: 13px; color: var(--gray); line-height: 1.8; }
+  .service-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+  .service-tag {
+    background: var(--white); border: 1px solid var(--orange);
+    color: var(--orange); font-size: 11px; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px;
+  }
+  .service-card.featured .service-tag { background: var(--orange); color: var(--white); }
+
+  /* ========== POINTS ========== */
+  .points { background: var(--cream); }
+  .points-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .point-card {
+    background: var(--white); border-radius: 14px; padding: 28px 22px;
+    text-align: center; border-top: 4px solid var(--orange);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .point-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.08); }
+  .point-num {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 48px; font-weight: 900; color: var(--orange-mid);
+    line-height: 1; margin-bottom: 12px;
+  }
+  .point-icon { font-size: 32px; margin-bottom: 12px; }
+  .point-title { font-size: 15px; font-weight: 900; color: var(--gray-dark); margin-bottom: 10px; line-height: 1.4; }
+  .point-body { font-size: 12px; color: var(--gray); line-height: 1.8; }
+
+  /* ========== FLOW ========== */
+  .flow { background: var(--white); }
+  .flow-steps { display: flex; flex-direction: column; gap: 0; }
+  .flow-step {
+    display: grid; grid-template-columns: 80px 1fr;
+    gap: 0; position: relative;
+  }
+  .flow-step::after {
+    content: ''; position: absolute; left: 39px; top: 80px; bottom: -20px; width: 2px;
+    background: repeating-linear-gradient(180deg, var(--orange) 0, var(--orange) 8px, transparent 8px, transparent 16px);
+  }
+  .flow-step:last-child::after { display: none; }
+  .flow-left { display: flex; flex-direction: column; align-items: center; padding-top: 4px; }
+  .flow-num {
+    width: 56px; height: 56px; background: var(--orange); color: var(--white);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: 'Noto Serif JP', serif; font-size: 22px; font-weight: 900;
+    flex-shrink: 0; box-shadow: 0 4px 14px rgba(242,101,34,0.35);
+    position: relative; z-index: 1;
+  }
+  .flow-right {
+    background: var(--gray-bg); border-radius: 12px; padding: 22px 24px;
+    margin: 0 0 24px 16px;
+    border-left: 3px solid var(--orange-mid);
+  }
+  .flow-step-title { font-size: 16px; font-weight: 900; color: var(--gray-dark); margin-bottom: 6px; }
+  .flow-step-body { font-size: 13px; color: var(--gray); line-height: 1.8; }
+  .flow-free {
+    display: inline-flex; align-items: center;
+    background: var(--orange); color: var(--white);
+    font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 3px;
+    margin-left: 8px; vertical-align: middle;
+  }
+
+  /* ========== VOICE ========== */
+  .voices { background: var(--cream); }
+  .voices-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .voice-card {
+    background: var(--white); border-radius: 14px; padding: 24px 22px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    position: relative;
+  }
+  .voice-quote-mark {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 64px; color: var(--orange-mid); line-height: 0.5;
+    margin-bottom: 14px; display: block;
+  }
+  .voice-text { font-size: 13px; line-height: 1.9; color: var(--gray-dark); margin-bottom: 18px; }
+  .voice-author {
+    display: flex; align-items: center; gap: 10px;
+    padding-top: 14px; border-top: 1px solid var(--border);
+  }
+  .voice-avatar {
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    background: var(--orange-pale); display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .voice-name { font-size: 13px; font-weight: 700; color: var(--gray-dark); }
+  .voice-role { font-size: 11px; color: var(--gray); margin-top: 2px; }
+  .voice-stars { color: var(--orange); font-size: 13px; letter-spacing: 1px; margin-bottom: 4px; }
+
+  /* ========== FAQ ========== */
+  .faq { background: var(--white); }
+  .faq-list { display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    border: 1.5px solid var(--border); border-radius: 10px; overflow: hidden;
+  }
+  .faq-q {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 20px; cursor: pointer;
+    background: var(--off-white); transition: background 0.15s;
+    font-size: 14px; font-weight: 700; color: var(--gray-dark);
+    user-select: none;
+  }
+  .faq-q:hover { background: var(--orange-pale); }
+  .faq-q-icon {
+    width: 28px; height: 28px; background: var(--orange); color: var(--white);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 900; flex-shrink: 0;
+  }
+  .faq-a {
+    padding: 0 20px 0 62px;
+    font-size: 13px; color: var(--gray); line-height: 1.9;
+    max-height: 0; overflow: hidden; transition: max-height 0.3s, padding 0.3s;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding: 14px 20px 18px 62px; }
+  .faq-chevron { margin-left: auto; font-size: 12px; color: var(--orange); transition: transform 0.3s; }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+  /* ========== CTA ========== */
+  .cta-section {
+    background: var(--orange);
+    padding: 80px 40px;
+  }
+  .cta-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+  .cta-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.2); color: var(--white);
+    padding: 4px 14px; border-radius: 4px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+  .cta-h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(24px, 3vw, 38px); font-weight: 900;
+    color: var(--white); line-height: 1.45; margin-bottom: 16px;
+  }
+  .cta-desc { color: rgba(255,255,255,0.88); font-size: 15px; line-height: 1.9; margin-bottom: 36px; }
+  .cta-form {
+    background: var(--white); border-radius: 16px; padding: 36px 36px 28px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.18); text-align: left;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block; font-size: 12px; font-weight: 700;
+    color: var(--gray-dark); margin-bottom: 6px;
+  }
+  .form-group label .req {
+    background: var(--orange); color: var(--white);
+    font-size: 10px; padding: 1px 6px; border-radius: 2px; margin-left: 4px;
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 11px 14px;
+    border: 1.5px solid var(--border); border-radius: 7px;
+    font-family: inherit; font-size: 14px; outline: none;
+    background: var(--off-white); transition: border-color 0.2s;
+    color: var(--gray-dark);
+  }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--orange); background: var(--white);
+  }
+  .form-checkboxes { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+  .form-check {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13px; cursor: pointer;
+  }
+  .form-check input[type=checkbox] { accent-color: var(--orange); width: 15px; height: 15px; }
+  .form-submit {
+    width: 100%; padding: 16px;
+    background: var(--orange); color: var(--white);
+    border: none; border-radius: 8px;
+    font-family: inherit; font-size: 16px; font-weight: 900;
+    cursor: pointer; margin-top: 8px;
+    box-shadow: 0 4px 16px rgba(242,101,34,0.4);
+    transition: all 0.2s; letter-spacing: 0.04em;
+  }
+  .form-submit:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(242,101,34,0.45); }
+  .form-note {
+    text-align: center; font-size: 11px; color: var(--gray);
+    margin-top: 12px; line-height: 1.7;
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    background: #2C2C2C; color: rgba(255,255,255,0.6);
+    padding: 36px 40px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo {
+    font-size: 14px; font-weight: 700; color: var(--white);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .footer-logo-badge {
+    background: var(--orange); color: var(--white);
+    font-size: 10px; padding: 2px 8px; border-radius: 3px; font-weight: 700;
+  }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { color: rgba(255,255,255,0.5); font-size: 12px; text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy { font-size: 11px; }
+
+  /* ========== DIVIDER ========== */
+  .section-divider {
+    height: 4px;
+    background: repeating-linear-gradient(90deg, var(--orange) 0, var(--orange) 12px, transparent 12px, transparent 24px);
+  }
+
+  /* ========== ANIMATIONS ========== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 768px) {
+    nav { padding: 0 16px; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .hero { padding: 48px 20px 40px; }
+    .section { padding: 56px 20px; }
+    .trouble-grid, .services-grid, .points-grid, .voices-grid, .form-row { grid-template-columns: 1fr; }
+    .cta-section { padding: 56px 20px; }
+    .cta-form { padding: 24px 20px; }
+    footer { flex-direction: column; padding: 28px 20px; text-align: center; }
+    .footer-links { justify-content: center; }
+    .flow-step { grid-template-columns: 60px 1fr; }
+    .flow-step::after { left: 29px; }
+    .flow-num { width: 44px; height: 44px; font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">⚽</div>
+    <div class="nav-logo-text">NPOスポーツクラブ<br><span>経営支援サービス</span></div>
+  </div>
+  <a href="#contact" class="nav-cta">📩 まずは無料相談</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">NPO法人・総合型地域スポーツクラブ向け</div>
+      <h1 class="hero-h1">
+        「やりたいこと」に<br>
+        集中できる<span class="accent">クラブ経営</span>を、<br>
+        <span class="underline">一緒に</span>つくりましょう。
+      </h1>
+      <p class="hero-lead">
+        スポーツ振興への情熱はあるのに、運営の手間や経営の不安で前に進めない――<br>
+        そんなNPO法人・地域スポーツクラブのお悩みに、<br>
+        大分県の専門家が伴走型でサポートします。
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-orange">📩 無料相談・資料請求</a>
+        <a href="#services" class="btn-outline">▶ サービスを見る</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-illust-card">
+        <div class="illust-header">こんな変化が起きています</div>
+        <div class="illust-items">
+          <div class="illust-item">
+            <div class="illust-emoji">😰</div>
+            <div>
+              <div class="illust-text">会員管理が紙とExcelで限界…</div>
+              <div class="illust-sub">毎月の集計に数時間かかっていた</div>
+            </div>
+          </div>
+          <div class="illust-arrow">↓</div>
+          <div class="illust-item" style="background:var(--orange-pale); border: 1.5px solid var(--orange);">
+            <div class="illust-emoji">😊</div>
+            <div>
+              <div class="illust-text" style="color:var(--orange);">システム化で月4時間の削減！</div>
+              <div class="illust-sub">スタッフの負担が大きく減りました</div>
+            </div>
+          </div>
+          <div class="illust-arrow">↓</div>
+          <div class="illust-item">
+            <div class="illust-emoji">🏆</div>
+            <div>
+              <div class="illust-text">本来の活動に集中できる</div>
+              <div class="illust-sub">子どもたちとの時間が増えた</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- TROUBLE -->
+<section class="section trouble" id="trouble">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">こんなお悩み、ありませんか？</div>
+      <h2 class="section-h2">多くのクラブが<span class="accent">「同じ壁」</span>にぶつかっています</h2>
+    </div>
+    <div class="trouble-intro">
+      スポーツへの情熱や地域への想いは十分にある。でも、<strong>運営・経営・IT化</strong>の壁が、<br>
+      クラブの成長を阻んでいることが少なくありません。
+    </div>
+    <div class="trouble-grid">
+      <div class="trouble-item">
+        <div class="trouble-check">あるある</div>
+        <div class="trouble-emoji">😓</div>
+        <div>
+          <div class="trouble-title">会員・収支の管理がアナログのままで、毎月の集計が大変</div>
+          <div class="trouble-body">紙やExcelが限界に。ミスや抜け漏れが不安…</div>
+        </div>
+      </div>
+      <div class="trouble-item">
+        <div class="trouble-check">あるある</div>
+        <div class="trouble-emoji">🤔</div>
+        <div>
+          <div class="trouble-title">HPが古いまま更新できず、新規会員の入口になっていない</div>
+          <div class="trouble-body">作って終わり、更新する余裕もスキルもない状態</div>
+        </div>
+      </div>
+      <div class="trouble-item">
+        <div class="trouble-check">あるある</div>
+        <div class="trouble-emoji">📉</div>
+        <div>
+          <div class="trouble-title">収支の見方がわからず、経営判断に自信が持てない</div>
+          <div class="trouble-body">財務の知識がないと、どこから手をつければいいのか…</div>
+        </div>
+      </div>
+      <div class="trouble-item">
+        <div class="trouble-check">あるある</div>
+        <div class="trouble-emoji">😰</div>
+        <div>
+          <div class="trouble-title">クレームや問い合わせの対応が属人的で、スタッフへの負担が大きい</div>
+          <div class="trouble-body">定款・規程の整備ができておらず、対応がバラバラに</div>
+        </div>
+      </div>
+      <div class="trouble-item">
+        <div class="trouble-check">あるある</div>
+        <div class="trouble-emoji">🌀</div>
+        <div>
+          <div class="trouble-title">会長の人柄や気合で運営してきたが、そろそろ限界を感じている</div>
+          <div class="trouble-body">仕組みで回る組織にしたい、でも何から始めれば？</div>
+        </div>
+      </div>
+      <div class="trouble-item">
+        <div class="trouble-check">あるある</div>
+        <div class="trouble-emoji">❓</div>
+        <div>
+          <div class="trouble-title">補助金・助成金の申請、どこに相談すれば良いかわからない</div>
+          <div class="trouble-body">情報収集から書類作成まで、一人で抱えている</div>
+        </div>
+      </div>
+    </div>
+    <div class="trouble-resolve">
+      <div class="trouble-resolve-icon">🤝</div>
+      <div>
+        <div class="trouble-resolve-text">それ、私たちと一緒に解決しませんか？</div>
+        <div class="trouble-resolve-sub">「難しい言葉は使わない」「現場に寄り添う」「提案だけで終わらない」——<br>NPOスポーツクラブの特性をよく理解した専門家が、伴走型でサポートします。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services" id="services">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">サービス内容</div>
+      <h2 class="section-h2">クラブの「困った」に<span class="accent">まるごと</span>対応します</h2>
+      <p class="section-desc">経営面からITインフラまで、地域スポーツクラブが必要とする支援をトータルで提供します。</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card featured">
+        <div class="service-num">SERVICE 01</div>
+        <span class="service-emoji">📊</span>
+        <div class="service-title">経営支援・伴走支援</div>
+        <div class="service-body">財務分析・収支計画・組織づくり・規程整備など、クラブ経営を多角的にサポート。「提案して終わり」ではなく、実行・定着まで一緒に取り組みます。月次ミーティング＋日常的なチャット相談で、いつでも頼れる体制を整えます。</div>
+        <div class="service-tags">
+          <span class="service-tag">財務分析</span>
+          <span class="service-tag">規程整備</span>
+          <span class="service-tag">組織設計</span>
+          <span class="service-tag">補助金活用</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">SERVICE 02</div>
+        <span class="service-emoji">🌐</span>
+        <div class="service-title">HP制作・運用支援</div>
+        <div class="service-body">新規会員の入口となるホームページを制作・運用。スマホ対応・SEO対策はもちろん、更新作業の代行や運用ルールの整備まで対応。「作って終わり」にしない、継続的なサポートを提供します。</div>
+        <div class="service-tags">
+          <span class="service-tag">HP制作</span>
+          <span class="service-tag">更新代行</span>
+          <span class="service-tag">スマホ対応</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">SERVICE 03</div>
+        <span class="service-emoji">💻</span>
+        <div class="service-title">会員管理システム開発</div>
+        <div class="service-body">紙・Excelの限界を超える、クラブ専用の会員管理システムを開発。入会・退会・月謝管理・連絡配信まで一元化。クラブの規模や業務フローに合わせてカスタマイズします。</div>
+        <div class="service-tags">
+          <span class="service-tag">会員管理</span>
+          <span class="service-tag">月謝管理</span>
+          <span class="service-tag">連絡配信</span>
+          <span class="service-tag">カスタム開発</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">SERVICE 04</div>
+        <span class="service-emoji">📚</span>
+        <div class="service-title">セミナー・研修・アドバイザー</div>
+        <div class="service-body">財務・ガバナンス・IT活用など、クラブ運営に必要な知識をわかりやすくお伝えするセミナーや研修を実施。また、定期的なアドバイザー契約で継続的な経営相談にも対応します。</div>
+        <div class="service-tags">
+          <span class="service-tag">セミナー</span>
+          <span class="service-tag">研修</span>
+          <span class="service-tag">アドバイザー</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- POINTS -->
+<section class="section points" id="points">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">選ばれる理由</div>
+      <h2 class="section-h2">「NPOスポーツ」を<span class="accent">知っている</span>から、頼れる</h2>
+    </div>
+    <div class="points-grid">
+      <div class="point-card">
+        <div class="point-num">01</div>
+        <div class="point-icon">🏅</div>
+        <div class="point-title">現場を知るアドバイザーが直接対応</div>
+        <div class="point-body">大分県総合型地域スポーツクラブアドバイザーとして多くのクラブを支援してきた実績。机上の話ではなく、現場感覚でアドバイスします。</div>
+      </div>
+      <div class="point-card">
+        <div class="point-icon">💬</div>
+        <div class="point-num">02</div>
+        <div class="point-title">難しい言葉を使わない、伝わる支援</div>
+        <div class="point-body">「ガバナンス」「KPI」といった用語に頼らず、クラブの言葉で一緒に考えます。セミナーでも常に「わかりやすさ」を大切にしています。</div>
+      </div>
+      <div class="point-card">
+        <div class="point-icon">🚶</div>
+        <div class="point-num">03</div>
+        <div class="point-title">「提案して終わり」にしない伴走型</div>
+        <div class="point-body">コンサルにありがちな「報告書を渡して終わり」は一切しません。実行・定着・成果が出るまで、チームの一員として動き続けます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="section flow" id="flow">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">ご支援の流れ</div>
+      <h2 class="section-h2">はじめての方でも<span class="accent">安心</span>のステップ</h2>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-left"><div class="flow-num">1</div></div>
+        <div class="flow-right">
+          <div class="flow-step-title">無料相談 <span class="flow-free">無料</span></div>
+          <div class="flow-step-body">まずはオンライン（Zoom等）で30〜60分のお話を。「まだ相談できる段階じゃない」は関係ありません。モヤモヤを整理するだけでも大歓迎です。</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left"><div class="flow-num">2</div></div>
+        <div class="flow-right">
+          <div class="flow-step-title">ヒアリング & 現状診断 <span class="flow-free">無料</span></div>
+          <div class="flow-step-body">クラブの現状（財務・組織・ITなど）を詳しくヒアリングし、課題を整理した診断レポートをご提供します。まずここから始めてみましょう。</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left"><div class="flow-num">3</div></div>
+        <div class="flow-right">
+          <div class="flow-step-title">支援プランのご提案</div>
+          <div class="flow-step-body">課題・予算・優先度に合わせたオーダーメイドプランをご提案します。「まず会員管理だけ」「まずHPだけ」など、部分的なご依頼ももちろんOKです。</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left"><div class="flow-num">4</div></div>
+        <div class="flow-right">
+          <div class="flow-step-title">支援スタート・伴走開始</div>
+          <div class="flow-step-body">ご納得いただいてから開始します。月次定例ミーティング＋日常的なチャット相談で、継続的に伴走します。最短で翌週からキックオフ可能です。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- VOICES -->
+<section class="section voices" id="voices">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">ご支援先の声</div>
+      <h2 class="section-h2">一緒に取り組んだ<span class="accent">クラブの声</span></h2>
+    </div>
+    <div class="voices-grid">
+      <div class="voice-card">
+        <div class="voice-stars">★★★★★</div>
+        <span class="voice-quote-mark">"</span>
+        <div class="voice-text">会員管理システムを導入してから、毎月の集計作業が格段に楽になりました。以前は数時間かかっていた作業が30分以内に。スタッフ全員の負担が減り、子どもたちとの時間が増えました。</div>
+        <div class="voice-author">
+          <div class="voice-avatar">👨‍💼</div>
+          <div>
+            <div class="voice-name">A様</div>
+            <div class="voice-role">NPO法人スポーツクラブ / 事務局長</div>
+          </div>
+        </div>
+      </div>
+      <div class="voice-card">
+        <div class="voice-stars">★★★★★</div>
+        <span class="voice-quote-mark">"</span>
+        <div class="voice-text">財務の話が苦手で避けていたのですが、わかりやすく説明してもらえて初めて自分たちの数字を理解できました。今では毎月の収支を自分でチェックできるようになっています。</div>
+        <div class="voice-author">
+          <div class="voice-avatar">👩‍💼</div>
+          <div>
+            <div class="voice-name">B様</div>
+            <div class="voice-role">総合型地域スポーツクラブ / 代表理事</div>
+          </div>
+        </div>
+      </div>
+      <div class="voice-card">
+        <div class="voice-stars">★★★★★</div>
+        <span class="voice-quote-mark">"</span>
+        <div class="voice-text">HPを刷新してから問い合わせが増え、新規会員の獲得にもつながっています。更新の代行もお願いできるので、情報を常に最新に保てています。もっと早く依頼すればよかった。</div>
+        <div class="voice-author">
+          <div class="voice-avatar">👨‍💼</div>
+          <div>
+            <div class="voice-name">C様</div>
+            <div class="voice-role">スポーツ系NPO法人 / 副理事長</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq" id="faq">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">よくある質問</div>
+      <h2 class="section-h2">気になる<span class="accent">Q&A</span></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-icon">Q</div>
+          設立間もないクラブでも相談できますか？
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a">はい、むしろ設立初期のほうが、仕組みづくりの効果が大きいことが多いです。設立3年目以内のクラブも多数ご支援してきました。まずはお気軽にご相談ください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-icon">Q</div>
+          費用はどのくらいかかりますか？
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a">クラブの規模・課題・支援内容によって異なります。まずは無料相談で現状をお聞きした上で、クラブの予算に合わせた最適なプランをご提案します。「まず1つだけ」から始めることも可能です。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-icon">Q</div>
+          大分県外のクラブでも対応可能ですか？
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a">はい、オンライン（Zoom等）でのご支援であれば全国対応可能です。まずはオンラインでの無料相談からお気軽にどうぞ。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-icon">Q</div>
+          会員管理システムはどんなクラブでも使えますか？
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a">はい、クラブの規模や業務フローに合わせてカスタマイズ開発しますので、どんなクラブでも対応できます。既存のシステムからの移行サポートも行っています。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-icon">Q</div>
+          支援を途中で止めることはできますか？
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a">もちろんです。長期契約を強制するようなことは一切ありません。プランごとに解約条件を明確にしていますので、安心してご相談ください。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <div class="cta-label">まずはお気軽に</div>
+    <h2 class="cta-h2">「困ったな」と思ったその瞬間が<br>ご相談のタイミングです</h2>
+    <p class="cta-desc">
+      資料請求だけでも大歓迎。無料相談は30〜60分で、押し売りは一切しません。<br>
+      一緒に「前に進める」クラブ経営を考えましょう。
+    </p>
+    <div class="cta-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>クラブ・法人名 <span class="req">必須</span></label>
+          <input type="text" placeholder="○○スポーツクラブ">
+        </div>
+        <div class="form-group">
+          <label>ご担当者名 <span class="req">必須</span></label>
+          <input type="text" placeholder="山田 太郎">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>メールアドレス <span class="req">必須</span></label>
+          <input type="email" placeholder="example@mail.com">
+        </div>
+        <div class="form-group">
+          <label>お電話番号</label>
+          <input type="tel" placeholder="090-0000-0000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>ご関心のある内容（複数選択可）</label>
+        <div class="form-checkboxes">
+          <label class="form-check"><input type="checkbox"> 経営支援・伴走支援</label>
+          <label class="form-check"><input type="checkbox"> HP制作・運用</label>
+          <label class="form-check"><input type="checkbox"> 会員管理システム</label>
+          <label class="form-check"><input type="checkbox"> セミナー・研修</label>
+          <label class="form-check"><input type="checkbox"> まずは資料が欲しい</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>お困りのことや、聞いてみたいこと（任意）</label>
+        <textarea placeholder="例：会員管理をデジタル化したいが、何から始めればいいか分からない…"></textarea>
+      </div>
+      <button class="form-submit">送信する →</button>
+      <div class="form-note">🔒 個人情報は適切に管理し、第三者への提供は行いません。<br>送信後、1〜2営業日以内にご連絡いたします。</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="footer-logo-badge">⚽</div>
+    NPOスポーツクラブ経営支援サービス
+  </div>
+  <div class="footer-links">
+    <a href="#">プライバシーポリシー</a>
+    <a href="#">会社概要</a>
+    <a href="#">お問い合わせ</a>
+  </div>
+  <div class="footer-copy">© 2025 All rights reserved.</div>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  const item = el.parentElement;
+  item.classList.toggle('open');
+}
+</script>
+</body>
+</html>
